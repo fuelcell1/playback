@@ -1,0 +1,67 @@
+@(
+   css: List[String], 
+   headJs: List[String], 
+   bodyJs: List[String], 
+   analytics: String
+)(content: Html)
+<!-- 
+css: css file path
+headJs: javascript file paths DOM relevant
+bodyJs: javascript file paths loaded at the end of the page
+content: html body
+-->
+<!doctype html>
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=8" />
+   <title>Playback</title>
+   <link rel="stylesheet" href="/public/stylesheets/third-party/bootstrap.min.css">
+   <link rel="stylesheet" href="/public/jstylesheets/third-party/bootstrap-responsive.min.css">
+   <link rel="stylesheet" href="/public/stylesheets/third-party/prettify.css">
+   <!-- Injected -->
+   @for(cssFile <- css) {
+     <link rel="stylesheet" href="/assets/stylesheets/@cssFile">
+   } 
+   <!-- Logs -->
+   <script src="/public/javascripts/debug.min.js"></script>
+   <!-- jQuery -->
+   <script src="/public/javascripts/jquery-1.7.1.min.js"></script>
+   <script src="/public/javascripts/augment.js"></script>
+   <!-- Bootstrap -->
+   <script src="/public/javascripts/prettify.js"></script> 
+   <script src="/public/javascripts/less-1.3.0.min.js"></script>
+   <!-- Backbone/Marionette -->
+   <script src="/public/javascripts/json2.js"></script>
+   <script src="/public/javascripts/underscore.min.js"></script>
+   <script src="/public/javascripts/backbone.min.js"></script>
+   <script src="/public/javascripts/backbone.marionette-0.8.1.min.js"></script>
+   <!-- Injected -->
+   @for(jsFile <- headJs) {
+      <script src="/assets/javascripts/@jsFile"></script>
+   } 
+</head>
+<body data-spy="scroll" data-target=".subnav" data-offset="50" onload="prettyPrint();">
+   @content
+   <!-- Bootstrap -->
+   <script src="/public/javascripts/bootstrap.min.js"></script>
+   <!-- Injected -->
+   @for(jsFile <- bodyJs) {
+      <script src="/assets/javascripts/@jsFile"></script>
+   } 
+   <!-- Analytics -->
+   <div id="google-analytics">@analytics</div>
+   <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', $('div#google-analytics').html()]);
+      _gaq.push(['_trackPageview']);
+      (function () {
+         var ga = document.createElement('script');       
+         ga.type = 'text/javascript';
+         ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0];
+         s.parentNode.insertBefore(ga, s);
+      })();
+   </script>
+</body>
+</html>

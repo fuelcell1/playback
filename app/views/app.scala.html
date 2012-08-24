@@ -1,0 +1,69 @@
+@()
+@main(
+   css = List(),
+   headJs = List(),
+   bodyJs = List(),
+   analytics = "Google Analytics ID"
+) {
+   @layout(
+      // CSS
+      List(
+         // App
+         "app.css",
+         // Action1
+         "action1.css",
+         // Action2
+         "action2.css"
+      ),
+      // Javascripts
+      List(        
+         // Namespaces (window object)
+         "app/namespaces.js",
+         
+         // Utils and Logging
+         "utils/utils.js",
+         "utils/logger.js",
+        
+         // Helpers
+         "helpers/compatibility.js",
+         "helpers/collections.js",
+         
+         // App
+         "app/config.js",
+         "app/events.js", 
+         "app/state.js", 
+         "app/ui.js", 
+         "app/errors.js", 
+         "app/routes.js", 
+         
+         // Default Region
+         "views/region.js",
+        
+         // Default Layout
+         "views/layout.js",
+         
+         // Models
+         // TODO
+         
+         // Collections
+         // TODO
+         
+         // Pages
+            // Action1
+            "pages/action1/view.js", // Marionette Layout
+            "pages/action1/events.js", // View logic
+            "pages/action1/state.js", // View state, as long as the page is rendered
+            "pages/action1/ui.js", // DOM manipulation
+            "pages/action1/errors.js", // Error references
+            
+            // Action2
+            "pages/action2/view.js",
+            "pages/action2/events.js",
+            "pages/action2/state.js",
+            "pages/action2/ui.js",
+            "pages/action2/errors.js",
+           
+         "app/app.js" // Start the app here
+      )
+   )
+}
