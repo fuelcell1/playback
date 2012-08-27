@@ -18,9 +18,11 @@ class App.Events.Action1 extends Backbone.Model
   @trace renderPage1: () ->
   
     things = new App.Collections.Things()
-    things.fetch()
     
+    # Allow Collection to update on model.fetch() return
     App.Pages.State.Action1.setThings things
+    
+    things.fetch()
     
     # Render
     App.Pages.State.Action1.getLayout().content.show new App.CompositeViews.Action1Things(

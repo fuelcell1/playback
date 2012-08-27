@@ -2,10 +2,11 @@ debug.info 'load app'
 
 # Routes
 # Specify defined method on the right from the window.Routes() class.
+# Left-hand assignment must match class names, e.g. action3 => class Action3
 ROUTES =
-  'action1/:page': 'action1'
-  'action2/:page': 'action2'
-  '*path': 'default' # Default
+  'action1/:page': 'standardRouter'
+  'action2/:page': 'standardRouter'
+  '*path': 'defaultRouter'
   
 # App.
 App.Global.Events = new Events()
@@ -37,5 +38,5 @@ App.Global.State.getNavRegion().show new App.Views.Nav()
 App.Router = new Routes(
   routes: ROUTES
 )
-App.Router.setDefaultRoute 'action1'
+App.Router.setDefaultRoute 'action1/1'
 Backbone.history.start()

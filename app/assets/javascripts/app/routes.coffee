@@ -11,7 +11,12 @@ class window.Routes extends Backbone.Marionette.AppRouter
   @trace initialize: () ->
     
     debug.info 'Routes: ' + JSON.stringify @routes
-    
+
+  # Case insensitive: http://codeepiphany.blogspot.com/2012/05/case-insensitive-backbone-routers-with.html
+  _routeToRegExp: (route) ->
+    route = route.replace(/[-[\]{}()+?.,\\^$|#\s]/g, '\\$&').replace(/:\w+/g, '([^/]*)').replace(/\*\w+/g, '(.*?)')
+    new RegExp('^' + route + '$', 'i') # Just add the 'i'
+
   @trace setDefaultRoute: (route) ->
     
     App.Data.defaultRoute = route
@@ -66,13 +71,12 @@ class window.Routes extends Backbone.Marionette.AppRouter
     return true
          
   # When we reload, we can check for auth and redirect for somewhere else. 
-  # @route, String, The page being loaded, e.g. <page>/1
-  @trace onStandardPageLoad: (route) ->
+  @trace onStandardPageLoad: (page) ->
     
     if !@isAuthed()
       return
       
-    @setupPage route
+    @setupPage page
 
   # Everytime a page is loaded, default data is cleared by instantiating new 
   # Views, Events, UI, State, and Error classes.
@@ -103,22 +107,15 @@ class window.Routes extends Backbone.Marionette.AppRouter
     
     eval goTo
     
-  # Place routing actions below.
+  # All routes hit this method.
+  # @page, Integer, Page number.
+  @trace standardRouter: (page) ->
     
-  # Action1 Page.
-  # @page, String, The page being loaded.
-  @trace action1: (page) ->
+    debug.info 'page: ' + page
 
     @onStandardPageLoad page
-
-  # Action2 Page.
-  # @page, String, The page being loaded.
-  @trace action2: (page) ->
-
-    @onStandardPageLoad page
-
-  # Default route.
-  @trace default: () ->
     
-    # TODO make this eval-able?
-    @action1 1
+  # Non-matching routes hit this.
+  @trace defaultRouter: () ->
+    
+    @.navigate @getDefaultRoute(), true
