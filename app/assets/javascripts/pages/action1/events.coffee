@@ -21,7 +21,7 @@ class App.Events.Action1 extends Backbone.Model
     
     # Allow Collection to update on model.fetch() return
     App.Pages.State.Action1.setThings things
-    
+
     things.fetch()
     
     # Render

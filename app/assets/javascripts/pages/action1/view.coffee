@@ -39,9 +39,10 @@ class App.ItemViews.Action1Thing extends Backbone.Marionette.ItemView
   
   @trace initialize: (options) ->
     
-    @model.on 'change', @render
+    @model.on 'change', () ->
+      @render
     
-  close: () ->
+  @trace close: () ->
     
     @remove()
     @unbind()
@@ -54,9 +55,11 @@ class App.CompositeViews.Action1Things extends Backbone.Marionette.CompositeView
   
   @trace initialize: (options) ->
     
-    @collection.on 'change', @render
+    @collection.on 'change', (model) ->
+      @collection = App.Helpers.Collections.updateModel model, @
+      @render
   
-  close: () ->
+  @trace close: () ->
     
     @remove()
     @unbind()

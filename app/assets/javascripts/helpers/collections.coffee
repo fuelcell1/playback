@@ -21,10 +21,13 @@ class Helpers.Collections extends Backbone.Model
   # @key, Optional[String], The model attribute value to match on.
   @trace updateModel: (model, collection, where, key) ->
     
-    if where is null || key is null
+    if where is undefined || key is undefined
       debug.info 'simple update'
+      
       collection.remove model
       collection.add model
+      
+      return collection
     
     clause = { }
     clause[where] = key
@@ -32,7 +35,7 @@ class Helpers.Collections extends Backbone.Model
     _.each collection.where(clause), (modelToUpdate) =>
       collection.remove modelToUpdate
     collection.add model
-      
+    
     collection
      
   # Sort a collection based on a model attribute.
