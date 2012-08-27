@@ -1,11 +1,74 @@
 @()
 <script type="text/template" id="template-action1">
 <!-- Bound:
-   button#do-test
+   button.do-add_thing Add a Thing.
 -->
-<!-- global content -->
-<button id="do-test" class="btn btn-medium">Test Page Action1</button>
-<div id="region-content">
-   <!-- swap content -->
+<div class="container-fluid offset-from-top">
+   <div class="row-fluid">
+      <div class="span1">
+         Action1
+         <button id="do-add_thing" class="btn btn-medium">Add Thing</button>
+      </div>
+      <div class="span11">
+         <div id="region-content">
+            <!-- page content -->
+         </div>
+      </div>
+   </div>
 </div>
+</script>
+
+<script type="text/template" id="template-action1-thing">
+<!-- Bound:
+   button.do-remove_thing Shows alert.
+-->
+<!-- Notes:
+   CSS gets wonky without fixed overrides specified.
+-->
+<tr>
+   <td style="width: 100%;">
+      <p class="action1-custom"><%= obj.id %>, <%= obj.name %>, <%= obj.extra %> </p>
+   </td>
+   <td class="action-td" style="width: 10%;">
+      <button id="do-remove_thing_<%= obj.id %>" data-id="<%= obj.id %>" class="btn btn-medium do-remove_thing">X</button>				
+   </td>
+</tr>
+</script>
+
+<script type="text/template" id="template-action1-things">
+<!-- Bound:
+   div#remove_success_alert
+   div#remove_fail_alert
+   div#remove_verify_alert
+   button#do-remove_yes Remove Thing.
+   button#do-remove_no Hide verification alert.
+   div#no_things
+   div#things_collection_container
+   div#things_collection
+-->
+<div class="action1-alerts">
+   <div id="remove_success_alert" class="alert alert-success hide fade in">
+      Successfully removed.
+   </div>
+   <div id="remove_fail_alert" class="alert alert-error hide fade in">
+      There was an error removing.
+   </div>
+   <div id="remove_verify_alert" class="alert alert-info hide fade in">
+      Are you sure you want to remove?
+      <button id="do-remove_yes" class="btn btn-medium">Yes</button>
+      <button id="do-remove_no" class="btn btn-medium">No</button>  
+   </div>
+</div>
+<div id="no_things" class="hide">
+   <h3>No things do display.</h3>
+</div>
+<table id="things_collection_container" class="table table-striped table-bordered">
+   <thead>
+      <tr>
+         <th>Name</th>
+      </tr>
+   </thead>
+   <tbody id="things_collection">
+   </tbody>
+</table>
 </script>

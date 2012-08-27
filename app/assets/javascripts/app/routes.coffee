@@ -11,7 +11,15 @@ class window.Routes extends Backbone.Marionette.AppRouter
   @trace initialize: () ->
     
     debug.info 'Routes: ' + JSON.stringify @routes
-   
+    
+  @trace setDefaultRoute: (route) ->
+    
+    App.Data.defaultRoute = route
+    
+  @trace getDefaultRoute: () ->
+    
+    App.Data.defaultRoute
+    
   @trace storeRoute: () ->
     
     @history.push Backbone.history.fragment
@@ -40,9 +48,9 @@ class window.Routes extends Backbone.Marionette.AppRouter
     
     current = @getFormattedWindowHash().split('/')[0]
 
-    # Allow us to not specify 'route = <route' inside every routing method.
+    # Allow us to not specify 'route = <route>' inside every routing method.
     if !current
-      current = 'index'
+      current = @getDefaultRoute()
     else
       current = current
 
@@ -89,11 +97,7 @@ class window.Routes extends Backbone.Marionette.AppRouter
     
     eval state
     
-    errors = 'App.Pages.Errors.' + route + ' = new App.Errors.' + route + '()'
-    debug.info 'errors: ' + errors
-    
-    eval errors
-    
+    # The magic which routes to the page.
     goTo = 'App.Pages.Events.' + route + '.router(parseInt(' + page + '))'
     debug.info 'goTo: ' + goTo
     
@@ -101,19 +105,20 @@ class window.Routes extends Backbone.Marionette.AppRouter
     
   # Place routing actions below.
     
-  # Index page.
+  # Action1 Page.
   # @page, String, The page being loaded.
-  @trace index: (page) ->
+  @trace action1: (page) ->
 
     @onStandardPageLoad page
 
-  # Geofences page.
+  # Action2 Page.
   # @page, String, The page being loaded.
-  @trace geofences: (page) ->
-   
+  @trace action2: (page) ->
+
     @onStandardPageLoad page
 
   # Default route.
   @trace default: () ->
     
-    @index 1
+    # TODO make this eval-able?
+    @action1 1

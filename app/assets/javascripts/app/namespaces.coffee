@@ -4,6 +4,9 @@ window.Portal = { }
 # Holds the entire application. 
 window.App = { } 
 
+# Holds class references to all Helpers.
+window.Helpers = { }
+
 # Holds class references for app/pages to all Views, Events, UI, Errors, and states.
 App.Config = { }
 App.Views = { }
@@ -21,7 +24,6 @@ App.Pages.Views = { }
 App.Pages.Events = { }
 App.Pages.UI = { }
 App.Pages.State = { }
-App.Pages.Errors = { }
 
 # Holds instantiated references to all Helpers.
 App.Helpers = { }

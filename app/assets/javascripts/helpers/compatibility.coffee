@@ -1,6 +1,6 @@
-debug.info 'load App.Helpers.Compatibility'
+debug.info 'load Helpers.Compatibility'
 
-class App.Helpers.Compatibility extends Backbone.Model
+class Helpers.Compatibility extends Backbone.Model
 
   ie: false
   ieVersion: null
@@ -9,7 +9,7 @@ class App.Helpers.Compatibility extends Backbone.Model
     
     @ie = @attributes.ie
     @ieVersion = @attributes.ieVersion
-    
+       
   # Check if browser type is Internet Explorer.
   @trace isIE: () ->
     

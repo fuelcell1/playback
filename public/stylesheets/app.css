@@ -1,0 +1,9 @@
+.offset-from-top {
+	margin-top: 50px;
+}
+.no-link {
+	cursor: pointer;
+}
+.no-link:hover {
+	font-weight: bold;
+}

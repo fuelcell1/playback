@@ -1,4 +1,4 @@
-class App.Logger
+class Logger
   
   constructor: () ->
     if !@shouldLog(@getWindowParam('log'))
@@ -50,4 +50,4 @@ class App.Logger
     
     debug.setLevel 0
 
-new App.Logger()
+new Logger()

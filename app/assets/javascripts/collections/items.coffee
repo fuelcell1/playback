@@ -2,7 +2,7 @@ debug.info 'load App.Collections.Items'
 
 class App.Collections.Items extends Backbone.Collection
   
-  model: App.Models.Items
+  model: App.Models.Item
   
   @trace initialize: () ->
   

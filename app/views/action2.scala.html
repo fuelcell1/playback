@@ -1,11 +1,33 @@
 @()
 <script type="text/template" id="template-action2">
 <!-- Bound:
-   button#do-test
+   button#do-add_item Simulates a WebSocket event.
 -->
-<!-- global content -->
-<button id="do-test" class="btn btn-medium">Test Page Action2</button>
-<div id="region-content">
-   <!-- swap content -->
+<div class="container-fluid offset-from-top">
+   <div class="row-fluid">
+      <div class="span1">
+         Action2
+         <button id="do-add_item" class="btn btn-medium">Simulate WebSocket Add Item</button>
+      </div>
+      <div class="span11">
+         <div id="region-content">
+            <!-- page content -->
+         </div>
+      </div>
+   </div>
+</div>
+</script>
+
+<script type="text/template" id="template-action2-item">
+<div class="action2-item">
+   <p><%= obj.id %></p>
+</div>
+</script>
+
+<script type="text/template" id="template-action2-items">
+<!-- Bound:
+   div#items_collection
+-->
+<div id="items_collection">
 </div>
 </script>

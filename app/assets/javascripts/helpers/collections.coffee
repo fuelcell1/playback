@@ -1,6 +1,6 @@
-debug.info 'load App.Helpers.Collections'
+debug.info 'load Helpers.Collections'
 
-class App.Helpers.Collections extends Backbone.Model
+class Helpers.Collections extends Backbone.Model
   
   @trace initialize: () ->
   
@@ -44,9 +44,3 @@ class App.Helpers.Collections extends Backbone.Model
       model.get key
       
     collection.sort()
-    
-  # TODO
-  @trace createCollectionFromModelAttribute: (attribute, collection) =>
-
-  # TODO
-  @trace find: (whereClause) ->

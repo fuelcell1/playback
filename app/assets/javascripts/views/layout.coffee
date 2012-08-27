@@ -6,5 +6,7 @@ class App.Layouts.Default extends Backbone.Marionette.Layout
   
   regions:
     contentRegion: '#region-content'
+    navRegion: '#region-nav'
     
   @trace initialize: () ->
+   

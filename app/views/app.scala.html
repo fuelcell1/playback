@@ -16,6 +16,7 @@
          "action2.css"
       ),
       // Javascripts
+      // Listed in order, each one being dependent (or not) on the other.
       List(        
          // Namespaces (window object)
          "app/namespaces.js",
@@ -23,38 +24,38 @@
          // Utils and Logging
          "utils/utils.js",
          "utils/logger.js",
-        
-         // Helpers
-         "helpers/compatibility.js",
-         "helpers/collections.js",
-         
+                
          // App
-         "app/config.js",
          "app/events.js", 
          "app/state.js", 
          "app/ui.js", 
          "app/errors.js", 
          "app/routes.js", 
          
-         // Default Region
-         "views/region.js",
-        
-         // Default Layout
-         "views/layout.js",
-         
+         // Helpers
+         "helpers/compatibility.js",
+         "helpers/collections.js",         
+                  
          // Models
-         // TODO
+         "models/item.js", // Generic, think breakcrumbs
+         "models/thing.js",
+         "models/socket.js",
          
          // Collections
-         // TODO
-         
+         "collections/items.js",
+         "collections/things.js",
+        
          // Pages
+            // App
+            "views/region.js",
+            "views/layout.js",
+            "views/nav.js",
+            
             // Action1
             "pages/action1/view.js", // Marionette Layout
             "pages/action1/events.js", // View logic
             "pages/action1/state.js", // View state, as long as the page is rendered
             "pages/action1/ui.js", // DOM manipulation
-            "pages/action1/errors.js", // Error references
             
             // Action2
             "pages/action2/view.js",

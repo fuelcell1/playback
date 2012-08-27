@@ -1,46 +1,20 @@
 @(css: List[String], js: List[String])
 
-<!-- Templates -->
+<!-- Global Templates -->
+@nav() 
+
+<!-- Page Templates -->
 @action1()
 @action2()
 
 <!-- Wireframe -->
 <div id="default-region">
   <script type="text/template" id="template-layout">
-     <!-- Bound:
-        div#do-global-alert
-          span#do-global-alert-text
-        div#do-global-info
-          span#do-global-info-text
-     -->
-     <div id="region-navbar">
+     <div id="region-nav">
         <!-- navbar -->
      </div>
-     <!-- Notifications -->
-     <div id="do-global-alert" class="alert hide fade in">
-       <button class="close" data-dismiss="alert">×</button>
-       <strong>Warning!</strong> <span id="do-global-alert-text"></span>
-     </div>
-     <div id="do-global-info" class="alert alert-info hide fade in">
-       <button class="close" data-dismiss="alert">×</button>
-       <strong>Info!</strong> <span id="do-global-info-text"></span>
-     </div>
-     <div id="region-auth-container" class="container-fluid hide">
-        <div class="row-fluid">
-           <div id="region-auth">
-              <!-- login/signup/signin/loading -->
-           </div>
-        </div>
-     </div>
-     <div class="container-fluid">
-        <div class="row-fluid">
-           <div class="span2" id="region-sidebar">
-              <!-- menu -->
-           </div>
-           <div class="span10" id="region-content">
-              <!-- content -->
-           </div>
-        </div>
+     <div id="region-content">
+        <!-- content -->
      </div>
   </script>
 </div>

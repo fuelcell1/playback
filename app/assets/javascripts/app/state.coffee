@@ -4,100 +4,56 @@ class window.State extends Backbone.Model
   
   @trace initialize: () ->
 
+  # Set default application region. 
+  # Everything is placed within this div.
+  # @region, Marionette.Region, The main application region. 
   @trace setDefaultRegion: (region) ->
     
     App.Rendered.region = region  
     
+  # Get default application region.
   @trace getDefaultRegion: () ->
 
     App.Rendered.region
 
+  # Set default application layout.
+  # This layout holds all major regions of app (menu, content, etc.).
+  # @layout, Marionette.Layout, The main application layout.
   @trace setDefaultLayout: (layout) ->
 
     App.Rendered.layout = layout
   
+  # Get the default application layout, normally
+  # to reference the contentRegion.
   @trace getDefaultLayout: () ->
 
     App.Rendered.layout
   
-  @trace getSidebarRegion: () ->
-
-    @getDefaultLayout().sidebarRegion
-  
-  @trace setSidebarLayout: (layout) ->
-
-    App.RenderedLayouts.sideBarLayout = layout
-  
-  @trace getSidebarLayout: () ->
-
-    App.RenderedLayouts.sideBarLayout
-  
-  @trace getNavbarRegion: () ->
-
-    @getDefaultLayout().navbarRegion
-  
-  @trace getAuthRegion: () ->
-
-    @getDefaultLayout().regionAuth
-  
+  # Return a quicker reference to the main 
+  # content region of the application.
   @trace getContentRegion: () ->
 
     @getDefaultLayout().contentRegion
-  
-  @trace setAccount: (account) ->
-  
-    App.Data.account = account
-  
-  @trace getAccount: () ->
-  
-    App.Data.account
+   
+  # Return a quicker reference to the main 
+  # nav region of the application.
+  @trace getNavRegion: () ->
 
-  @trace setThings: (things) ->
-  
-    App.Data.things = things
- 
-  @trace getThings: () ->
-  
-    App.Data.things
-  
-  @trace setGroups: (groups) ->
-  
-    App.Data.groups = groups
-  
-  @trace getGroups: () ->
-  
-    App.Data.groups
-
-  @trace setGeofences: (geofences) ->
-  
-    App.Data.geofences = geofences
-
-  @trace getGeofences: () ->
-  
-    App.Data.geofences
-
-  @trace setRules: (rules) ->
-  
-    App.Data.rules = rules
-
-  @trace getRules: () ->
-  
-    App.Data.rules
+    @getDefaultLayout().navRegion
     
-  @trace setSocket: (socket) ->
-  
-    App.Data.socket = socket
-  
-  @trace getSocket: () ->
-  
-    App.Data.socket 
-    
+  # If not IE, get an idea of the user's location.
+  # @lat, String?, User's latitude.
+  # @lng, String?, User's longitude.
   @trace setGeoLocation: (lat, lng) ->
     
-    App.currentLocation = new App.Models.MapPoint
-      lat: lat
-      lng: lng
-      
+    debug.info 'lat: ' + lat
+    debug.info 'lng: ' + lng
+     
+    App.Data.geoLocation = 
+      lat: parseFlaot(lat)
+      lng: parseFloat(lng)
+
+  # If not IE, Retrieve the user's location.
   @trace getGeoLocation: () ->
 
-    App.currentLocation
+    App.Data.geoLocation

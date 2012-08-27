@@ -2,6 +2,7 @@
       
 # Allow logging of class methods and arguments (but not constructors).
 # TODO Doesn't seem to work in IE?
+# TODO Won't log nested: class App.Collections.Things logs as Things
 # Example:
 # class MyClass
 #   @trace methodA: ->

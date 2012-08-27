@@ -17,10 +17,16 @@ class App.Events.Action1 extends Backbone.Model
 
   @trace renderPage1: () ->
   
-    # Do page 1 related shit, like render another region with a model or collection.
-    # App.Pages.Action1.Views.pageRegion.show 1
-    # App.Pages.Action1.Globals.getLayout().pageRegion.show new App.CompositeViews.Action11(collection: App.Globals.getThings())
-                     
+    things = new App.Collections.Things()
+    things.fetch()
+    
+    App.Pages.State.Action1.setThings things
+    
+    # Render
+    App.Pages.State.Action1.getLayout().content.show new App.CompositeViews.Action1Things(
+      collection: App.Pages.State.Action1.getThings()
+    )
+    
   @trace router: (page) ->
 
     if !@continueToLoad()
@@ -32,3 +38,53 @@ class App.Events.Action1 extends Backbone.Model
       when 1
         
         @renderPage1()
+        
+  # Non-render methods
+  
+  @trace clickAddThing: (event) ->
+      
+    # Remove the "no models in collection" warning.
+    if App.Pages.State.Action1.getThings().length is 0
+      App.Pages.UI.Action1.hideNoThings()
+    
+    # Simulate adding Thing.
+    id = Math.floor (Math.random() * 500) + 1
+    
+    App.Pages.State.Action1.getThings().add new App.Models.Thing(
+      id: id
+      name: 'thing' + id
+      extra: 'extra' + id
+    )
+    
+  @trace clickRemoveYes: () ->
+    
+    _.each App.Pages.State.Action1.getThings().where(id: App.Pages.State.Action1.getThingIdToDelete()), (thing) =>
+      
+      # Normally, delete from the data source, than decide
+      # on what alert to show.
+      
+      # thing.remove()
+      
+      App.Pages.State.Action1.getThings().remove thing
+   
+      # Update alerts.
+      App.Pages.UI.Action1.hideRemoveVerifyAlert()
+      App.Pages.UI.Action1.showRemoveSuccessAlert()
+      
+      setTimeout (->
+        App.Pages.UI.Action1.hideRemoveSuccessAlert()
+      ), 500
+
+      # Show "no models in collection" warning.
+      if App.Pages.State.Action1.getThings().length is 0
+        App.Pages.UI.Action1.showNoThings()
+    
+  @trace clickRemoveNo: () ->
+    
+    App.Pages.UI.Action1.hideRemoveVerifyAlert()
+    
+  @trace clickRemoveThing: (id) ->
+    
+    App.Pages.State.Action1.setThingIdToDelete id
+    
+    App.Pages.UI.Action1.showRemoveVerifyAlert()
