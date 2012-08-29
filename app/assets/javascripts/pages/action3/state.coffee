@@ -1,4 +1,4 @@
-class App.State.Action3 extends Backbone.Model
+yesclass App.State.Action3 extends Backbone.Model
   
   @trace initialize: () ->
     
