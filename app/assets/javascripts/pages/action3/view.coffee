@@ -4,7 +4,14 @@ class App.Views.Action3 extends Backbone.Marionette.Layout
   regions:
     content: '#region-content'
 
-  @trace close: () ->
-    
+  events:
+    'click button#do-something': 'doSomething'
+
+  @trace doSomething: (event) ->
+
+    App.Pages.Events.Action3.doSomething()
+
+  @trace close: () ->    
     @remove()
     @unbind()
+    

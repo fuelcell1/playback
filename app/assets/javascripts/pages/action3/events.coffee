@@ -10,7 +10,7 @@ class App.Events.Action3 extends Backbone.Model
   # Render the page.
   @trace doBeforeLayouts: () ->
 
-    App.Pages.State.Action3.setLayout new App.Views.Action1()
+    App.Pages.State.Action3.setLayout new App.Views.Action3()
     App.Global.State.getContentRegion().show App.Pages.State.Action3.getLayout()
 
   @trace renderPage1: () ->
