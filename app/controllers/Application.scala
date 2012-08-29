@@ -9,7 +9,6 @@ object Application extends Controller {
   def index = Action {
     Ok(views.html.app.render())
   }
-
   /* Example collection response */
   def things = Action {
     Ok("""[{"id":1,"name":"thing1"},{"id":2,"name":"thing2"}]""")

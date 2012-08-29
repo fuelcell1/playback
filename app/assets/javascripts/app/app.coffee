@@ -4,8 +4,9 @@ debug.info 'load app'
 # Specify defined method on the right from the window.Routes() class.
 # Left-hand assignment must match class names, e.g. action3 => class Action3
 ROUTES =
-  'action1/:page': 'standardRouter'
+  'action1/:page': 'standardRouter' 
   'action2/:page': 'standardRouter'
+  'action3/:page': 'standardRouter' # Hey, I'm new.
   '*path': 'defaultRouter'
   
 # App.
